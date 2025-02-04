@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo Servizio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .error-message {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Modulo Servizio</h1>
+        <form id="form_servizio" action="salva_dati.php" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome (IGN):</label>
+                <input type="text" class="form-control" id="nome" name="nome_ign" required>
+            </div>
+            <div class="form-group">
+                <label for="corpo">Corpo di appartenenza:</label>
+                <select class="form-control" id="corpo" name="corpo" required>
+                    <option value="Esercito">Esercito</option>
+                    <option value="Carabinieri">Carabinieri</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="grado">Grado:</label>
+                <input type="text" class="form-control" id="grado" name="grado" required>
+            </div>
+            <div class="form-group">
+                <label for="data">Data:</label>
+                <input type="date" class="form-control" id="data" name="data" required>
+            </div>
+            <div class="form-group">
+                <label for="ora_entrata">Ora di entrata in servizio:</label>
+                <input type="time" class="form-control" id="ora_entrata" name="ora_entrata" required>
+            </div>
+            <div class="form-group">
+                <label for="ora_uscita">Ora di uscita dal servizio:</label>
+                <input type="time" class="form-control" id="ora_uscita" name="ora_uscita" required>
+                <small id="ora_error" class="error-message">L'ora di uscita non può essere prima dell'ora di entrata!</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Invia</button>
+        </form>
+    </div>
+
+    <script>
+        // Funzione per il controllo dell'ora di uscita
+        document.getElementById('form_servizio').addEventListener('submit', function(event) {
+            const entrata = document.getElementById('ora_entrata').value;
+            const uscita = document.getElementById('ora_uscita').value;
+
+            // Confrontiamo le ore (le stringhe nel formato HH:MM possono essere confrontate direttamente)
+            if (uscita <= entrata) {
+                // Mostriamo il messaggio di errore
+                document.getElementById('ora_error').style.display = 'block';
+                // Blocchiamo l'invio del modulo
+                event.preventDefault();
+            } else {
+                // Nascondiamo il messaggio di errore (se presente)
+                document.getElementById('ora_error').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

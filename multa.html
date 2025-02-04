@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo Multa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Modulo Multa</h1>
+        <form action="salva_dati.php" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome (IGN):</label>
+                <input type="text" class="form-control" id="nome" name="nome_ign" required>
+            </div>
+            <div class="form-group">
+                <label for="corpo">Corpo di appartenenza:</label>
+                <select class="form-control" id="corpo" name="corpo_appartenza" required>
+                    <option value="Esercito">Esercito</option>
+                    <option value="Carabinieri">Carabinieri</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="grado">Grado:</label>
+                <input type="text" class="form-control" id="grado" name="grado" required>
+            </div>
+            <div class="form-group">
+                <label for="violazione">Tipo di violazione:</label>
+                <input type="text" class="form-control" id="violazione" name="tipo_violazione" required>
+            </div>
+            <div class="form-group">
+                <label for="luogo">Luogo:</label>
+                <input type="text" class="form-control" id="luogo" name="luogo" required>
+            </div>
+            <div class="form-group">
+                <label for="data">Data:</label>
+                <input type="date" class="form-control" id="data" name="data" required>
+            </div>
+            <div class="form-group">
+                <label for="ora">Ora:</label>
+                <input type="time" class="form-control" id="ora" name="ora" required>
+            </div>
+            <div class="form-group">
+                <label for="importo">Importo della multa (€):</label>
+                <input type="number" class="form-control" id="importo" name="importo" required>
+            </div>
+            <div class="form-group">
+                <label for="colleghi">Colleghi presenti:</label>
+                <textarea class="form-control" id="colleghi" name="colleghi_presenti" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Invia</button>
+        </form>
+    </div>
+</body>
+</html>
