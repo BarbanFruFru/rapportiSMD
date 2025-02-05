@@ -11,7 +11,7 @@
         }
         .container {
             max-width: 600px;
-            margin-top: 30px;
+            margin-top: 100px; /* Aggiungi un margine superiore per evitare la sovrapposizione */
         }
         .form-group {
             margin-bottom: 20px;
@@ -20,62 +20,46 @@
             color: red;
             display: none;
         }
+        .logo {
+            max-width: 15%;
+            height: auto; 
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
     </style>
 </head>
 <body>
-        <img src="images/2025-02-04_22.44.27-removebg-preview.png" alt="logo smd" class="logo">
+    <img src="images/2025-02-04_22.44.27-removebg-preview.png" alt="logo smd" class="logo">
     <div class="container">
         <h1 class="text-center">Modulo Servizio</h1>
         <form id="form_servizio" action="salva_dati.php" method="POST">
+            <h4>Compila il modulo</h4>
             <div class="form-group">
-                <label for="nome">Nome (IGN):</label>
-                <input type="text" class="form-control" id="nome" name="nome_ign" required>
+                <input type="text" class="form-control" id="nome" name="nome_ign" placeholder="Nome (IGN)" required>
             </div>
             <div class="form-group">
-                <label for="corpo">Corpo di appartenenza:</label>
                 <select class="form-control" id="corpo" name="corpo" required>
+                    <option value="" disabled selected>Corpo di appartenenza</option>
                     <option value="Esercito">Esercito</option>
                     <option value="Carabinieri">Carabinieri</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="grado">Grado:</label>
-                <input type="text" class="form-control" id="grado" name="grado" required>
+                <input type="text" class="form-control" id="grado" name="grado" placeholder="Grado" required>
             </div>
             <div class="form-group">
-                <label for="data">Data:</label>
                 <input type="date" class="form-control" id="data" name="data" required>
             </div>
             <div class="form-group">
-                <label for="ora_entrata">Ora di entrata in servizio:</label>
-                <input type="time" class="form-control" id="ora_entrata" name="ora_entrata" required>
+                <input type="time" class="form-control" id="ora_entrata" name="ora_entrata" placeholder="Ora di entrata in servizio" required>
             </div>
             <div class="form-group">
-                <label for="ora_uscita">Ora di uscita dal servizio:</label>
-                <input type="time" class="form-control" id="ora_uscita" name="ora_uscita" required>
+                <input type="time" class="form-control" id="ora_uscita" name="ora_uscita" placeholder="Ora di uscita dal servizio" required>
                 <small id="ora_error" class="error-message">L'ora di uscita non può essere prima dell'ora di entrata!</small>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Invia</button>
+            <input type="submit" class="btn btn-primary btn-block" value="Invia">
         </form>
     </div>
-
-    <script>
-        // Funzione per il controllo dell'ora di uscita
-        document.getElementById('form_servizio').addEventListener('submit', function(event) {
-            const entrata = document.getElementById('ora_entrata').value;
-            const uscita = document.getElementById('ora_uscita').value;
-
-            // Confrontiamo le ore (le stringhe nel formato HH:MM possono essere confrontate direttamente)
-            if (uscita <= entrata) {
-                // Mostriamo il messaggio di errore
-                document.getElementById('ora_error').style.display = 'block';
-                // Blocchiamo l'invio del modulo
-                event.preventDefault();
-            } else {
-                // Nascondiamo il messaggio di errore (se presente)
-                document.getElementById('ora_error').style.display = 'none';
-            }
-        });
-    </script>
 </body>
 </html>
