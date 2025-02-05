@@ -75,37 +75,28 @@
 
     <script>
     document.getElementById("moduloArresto").addEventListener("submit", function(event) {
-        event.preventDefault();
-        
-        let formData = new FormData(this);
-        let jsonData = {};
-        
-        formData.forEach((value, key) => {
-            jsonData[key] = value;
-        });
-
-        
-fetch("https://script.google.com/macros/s/AKfycbz-foqhCKV6OtF4ft-LRoLj0zXlz4nrI1Z_W9XAZ3pQPX9dcjxD2Gyr8KZTc3DW7Q/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    nome: "Mario",
-    corpo: "Polizia",
-    grado: "Tenente",
-    carcerato: "Sì",
-    motivo: "Rapina",
-    luogo: "Milano",
-    data: "2025-02-05",
-    ora: "14:30",
-    colleghi: "Luca, Marco"
-  })
-})
-.then(response => response.json())
-.then(data => console.log("Risposta:", data))
-.catch(error => console.error("Errore:", error));
+    event.preventDefault();
+    
+    // Raccogli i dati dal modulo
+    let formData = new FormData(this);
+    let jsonData = {};
+    
+    formData.forEach((value, key) => {
+        jsonData[key] = value; // Crea un oggetto con i dati del modulo
     });
+
+    // Invia i dati tramite fetch al Google Apps Script
+    fetch("https://script.google.com/macros/s/AKfycbz-foqhCKV6OtF4ft-LRoLj0zXlz4nrI1Z_W9XAZ3pQPX9dcjxD2Gyr8KZTc3DW7Q/exec", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonData) // Invia i dati raccolti nel modulo
+    })
+    .then(response => response.json())
+    .then(data => console.log("Risposta:", data))
+    .catch(error => console.error("Errore:", error));
+});
     </script>
 </body>
 </html>
