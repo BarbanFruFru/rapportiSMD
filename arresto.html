@@ -74,36 +74,33 @@
     </div>
 
     <script>
-    // Assicurati che il DOM sia caricato prima di aggiungere l'event listener
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("ModuloArresto").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            // Raccogli i dati dal modulo
-            let formData = new FormData(this);
-            let jsonData = {};
-            
-            // Crea l'oggetto jsonData dai dati del modulo
-            formData.forEach((value, key) => {
-                jsonData[key] = value; // Aggiungi ogni campo nel nostro oggetto jsonData
-            });
-
-            // Log dei dati che stiamo inviando per il debug
-            console.log("Dati del modulo da inviare:", jsonData);
-
-            // Invia i dati tramite fetch al Google Apps Script
-            fetch("https://script.google.com/macros/s/AKfycbwFeXUJjkpPCEcskeAcPX4einjgAAJotXqe8CCkBMYk8InJAy57mmzqz0z15b50iw5J/exec", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(jsonData) // Invia i dati raccolti nel modulo come JSON
-            })
-            .then(response => response.json())
-            .then(data => console.log("Risposta dal server:", data))  // Log della risposta dal server
-            .catch(error => console.error("Errore nella richiesta:", error));
-        });
+    document.getElementById("ModuloArresto").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    // Raccogli i dati dal modulo
+    let formData = new FormData(this);
+    let jsonData = {};
+    
+    // Crea l'oggetto jsonData dai dati del modulo
+    formData.forEach((value, key) => {
+        jsonData[key] = value; // Aggiungi ogni campo nel nostro oggetto jsonData
     });
+
+    // Log dei dati che stiamo inviando per il debug
+    console.log("Dati del modulo da inviare:", jsonData);
+
+    // Invia i dati tramite fetch al Google Apps Script
+    fetch("https://script.google.com/macros/s/AKfycbwFeXUJjkpPCEcskeAcPX4einjgAAJotXqe8CCkBMYk8InJAy57mmzqz0z15b50iw5J/exec", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonData) // Invia i dati raccolti nel modulo come JSON
+    })
+    .then(response => response.json())
+    .then(data => console.log("Risposta dal server:", data))  // Log della risposta dal server
+    .catch(error => console.error("Errore nella richiesta:", error));
+});
     </script>
 </body>
 </html>
