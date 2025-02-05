@@ -74,7 +74,7 @@
     </div>
 
     <script>
-    document.getElementById("moduloArresto").addEventListener("submit", function(event) {
+    document.getElementById("ModuloArresto").addEventListener("submit", function(event) {
     event.preventDefault();
     
     // Raccogli i dati dal modulo
@@ -90,7 +90,7 @@
     console.log("Dati del modulo da inviare:", jsonData);
 
     // Invia i dati tramite fetch al Google Apps Script
-    fetch("https://script.google.com/macros/s/AKfycbwviPgUItLAxlf40AhthfD8Mz5nAdtYZDRHp-imbuAlXgXmt6zdfOmAaWxretF1rPkV/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbwFeXUJjkpPCEcskeAcPX4einjgAAJotXqe8CCkBMYk8InJAy57mmzqz0z15b50iw5J/exec", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
