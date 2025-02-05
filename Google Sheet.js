@@ -1,6 +1,6 @@
 const scriptURL = 'https://script.google.com/macros/s/AKfycbyonEeiFHAcCRNxxpqTEb-Oez4Y18gjy79xOqec9hu5pv6yu3263MxNHa1OyArZNfJMwQ/exec'
 
-const form = document.forms['contact-form']
+const form = document.forms['ModuloArresto']
 
 form.addEventListener('submint', e => {
   e.preventDefault()
