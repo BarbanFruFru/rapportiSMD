@@ -11,17 +11,25 @@
         }
         .container {
             max-width: 600px;
-            margin-top: 30px;
+            margin-top: 100px; /* Aggiungi un margine superiore per evitare la sovrapposizione */
         }
         .form-group {
             margin-bottom: 20px;
         }
+        .logo {
+            max-width: 15%;
+            height: auto; 
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
     </style>
 </head>
 <body>
+    <img src="/Users/matteoromano/Desktop/Informatica/Pagina smd/images/2025-02-04_22.44.27-removebg-preview.png" alt="logo smd" class="logo">
     <div class="container">
         <h1 class="text-center">Modulo Arresto</h1>
-        <form action="salva_dati.php" method="POST">
+        <form id="moduloArresto">
             <div class="form-group">
                 <label for="nome">Nome (IGN):</label>
                 <input type="text" class="form-control" id="nome" name="nome_ign" required>
@@ -64,5 +72,27 @@
             <button type="submit" class="btn btn-primary btn-block">Invia</button>
         </form>
     </div>
+
+    <script>
+    document.getElementById("moduloArresto").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let formData = new FormData(this);
+        let jsonData = {};
+        
+        formData.forEach((value, key) => {
+            jsonData[key] = value;
+        });
+
+        fetch("QUI_CE_L_URL_DELLA_WEB_APP", {
+            method: "POST",
+            body: JSON.stringify(jsonData),
+            headers: { "Content-Type": "application/json" }
+        })
+        .then(response => response.text())
+        .then(data => alert(data))
+        .catch(error => console.error("Errore:", error));
+    });
+    </script>
 </body>
 </html>
