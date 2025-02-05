@@ -11,7 +11,7 @@
         }
         .container {
             max-width: 600px;
-            margin-top: 30px;
+            margin-top: 100px; /* Aggiungi un margine superiore per evitare la sovrapposizione */
         }
         .form-group {
             margin-bottom: 20px;
@@ -20,63 +20,53 @@
             color: grey;
             font-style: italic;
         }
+        .logo {
+            max-width: 15%;
+            height: auto; 
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
     </style>
 </head>
 <body>
+    <img src="/Users/matteoromano/Desktop/Informatica/Pagina smd/images/2025-02-04_22.44.27-removebg-preview.png" alt="logo smd" class="logo">
     <div class="container">
         <h1 class="text-center">Modulo Sequestro</h1>
-        <form action="salva_dati.php" method="POST">
+        <form method="post" action="" name="ModuloSequestro">
+            <h4>Compila il modulo</h4>
             <div class="form-group">
-                <label for="nome">Nome (IGN):</label>
-                <input type="text" class="form-control" id="nome" name="nome_ign" required>
+                <input type="text" class="form-control" id="nome" name="nome_ign" placeholder="Nome (IGN)" required>
             </div>
             <div class="form-group">
-                <label for="corpo">Corpo di appartenenza:</label>
                 <select class="form-control" id="corpo" name="corpo_appartenza" required>
+                    <option value="" disabled selected>Corpo di appartenenza</option>
                     <option value="Esercito">Esercito</option>
                     <option value="Carabinieri">Carabinieri</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="grado">Grado:</label>
-                <input type="text" class="form-control" id="grado" name="grado" required>
+                <input type="text" class="form-control" id="grado" name="grado" placeholder="Grado" required>
             </div>
             <div class="form-group">
-                <label for="sequestrato">Sequestrato:</label>
-                <input type="text" class="form-control" id="sequestrato" name="sequestrato" required>
+                <input type="text" class="form-control" id="sequestrato" name="sequestrato" placeholder="Sequestrato" required>
             </div>
             <div class="form-group">
-                <label for="motivo">Motivo:</label>
-                <textarea class="form-control" id="motivo" name="motivo" required></textarea>
+                <textarea class="form-control" id="motivo" name="motivo" rows="3" placeholder="Motivo" required></textarea>
             </div>
             <div class="form-group">
-                <label for="luogo">Luogo:</label>
-                <input type="text" class="form-control" id="luogo" name="luogo" required>
+                <input type="text" class="form-control" id="luogo" name="luogo" placeholder="Luogo" required>
             </div>
             <div class="form-group">
-                <label for="data">Data:</label>
                 <input type="date" class="form-control" id="data" name="data" required>
             </div>
             <div class="form-group">
-                <label for="ora">Ora:</label>
                 <input type="time" class="form-control" id="ora" name="ora" required>
             </div>
             <div class="form-group">
-                <label for="colleghi">Colleghi presenti:</label>
-                <textarea class="form-control" id="colleghi" name="colleghi_presenti" required></textarea>
+                <textarea class="form-control" id="colleghi" name="colleghi_presenti" rows="3" placeholder="Colleghi presenti" required></textarea>
             </div>
-            <div class="form-group">
-                <label for="oggetti">Oggetti Rinvenuti:</label>
-                <textarea class="form-control" id="oggetti" name="oggetti_rinvenuti" rows="6" required>
-Esempio:
-Banconota da 500€ x12
-M4 x1
-Passamontagna x1
-Hashish x64
-                </textarea>
-                <small class="form-text text-muted">Cancellare o modificare l'esempio.</small>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Invia</button>
+            <input type="submit" class="btn btn-primary btn-block" value="Invia">
         </form>
     </div>
 </body>
