@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulo Sequestro</title>
+    <title>Modulo Arresto</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
@@ -11,14 +11,10 @@
         }
         .container {
             max-width: 600px;
-            margin-top: 100px; /* Aggiungi un margine superiore per evitare la sovrapposizione */
+            margin-top: 100px; 
         }
         .form-group {
             margin-bottom: 20px;
-        }
-        .example-text {
-            color: grey;
-            font-style: italic;
         }
         .logo {
             max-width: 15%;
@@ -32,8 +28,7 @@
 <body>
     <img src="images/2025-02-04_22.44.27-removebg-preview.png" alt="logo smd" class="logo">
     <div class="container">
-        <h1 class="text-center">Modulo Sequestro</h1>
-        <form method="post" action="" name="ModuloSequestro">
+        <form method="post" name="ModuloArresto">
             <h4>Compila il modulo</h4>
             <div class="form-group">
                 <input type="text" class="form-control" id="nome" name="nome_ign" placeholder="Nome (IGN)" required>
@@ -49,7 +44,7 @@
                 <input type="text" class="form-control" id="grado" name="grado" placeholder="Grado" required>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="sequestrato" name="sequestrato" placeholder="Sequestrato" required>
+                <input type="text" class="form-control" id="carcerato" name="carcerato" placeholder="Carcerato" required>
             </div>
             <div class="form-group">
                 <textarea class="form-control" id="motivo" name="motivo" rows="3" placeholder="Motivo" required></textarea>
@@ -69,5 +64,7 @@
             <input type="submit" class="btn btn-primary btn-block" value="Invia">
         </form>
     </div>
+
+    <script src="Google_Sheets.js"></script> 
 </body>
 </html>
