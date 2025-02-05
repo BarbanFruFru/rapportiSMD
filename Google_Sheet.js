@@ -1,4 +1,4 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyGZmZ1IuXbHDIcJ4jrUs6ofmeRAUEjTfL02yWN2k1yqGjehUfwzZlbhr27LRHX5QpdPg/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwsMwqLUkzQfrxf0T9YxZKlQ2cgpACXEm8rnULPvKhgqctfqdvfmo2e7OKYibEQ1eieXA/exec'
 
 const form = document.forms['ModuloArresto']
 
