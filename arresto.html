@@ -87,16 +87,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         console.log("Dati del modulo da inviare:", jsonData);
 
-        fetch("https://script.google.com/macros/s/AKfycbxNwPznnL9HawkkvGed_QT9K9McFBzGpBRn4XTYIMf1XS7HSaRvKB7c4KXtxKkkOFlD/exec", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(jsonData)
-        })
-        .then(response => response.json()) 
-        .then(data => console.log("Risposta dal server:", data))
-        .catch(error => console.error("Errore nella richiesta:", error));
+        fetch("https://script.google.com/macros/s/AKfycbzGAR7h8r7c1bxF4lsuDvU9XarSS-1mqFhGOiIqNu3-i9KDXt4Q68cE1UA4RHr5GZZZ/exec", {
+method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(jsonData)
+})
+.then(response => response.json())
+.then(data => console.log("Risposta dal server:", data))
+.catch(error => console.error("Errore nella richiesta:", error));
     });
 });
     </script>
