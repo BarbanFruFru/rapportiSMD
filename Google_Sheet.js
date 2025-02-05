@@ -1,5 +1,4 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyonEeiFHAcCRNxxpqTEb-Oez4Y18gjy79xOqec9hu5pv6yu3263MxNHa1OyArZNfJMwQ/exec';
-
+const scriptURL = 'https://script.google.com/macros/s/AKfycbza2KWzCHfja41_8ITQy3GBM0AB22hP2FGzmqzt01pV43gPyeRMgg3Twk65_AaBS7N9Xw/exec';
 const form = document.forms['ModuloArresto'];
 
 form.addEventListener('submit', e => {
