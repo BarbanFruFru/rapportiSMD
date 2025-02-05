@@ -34,6 +34,7 @@
     <div class="container">
         <h1 class="text-center">Modulo Servizio</h1>
         <form method="post" name="ModuloServizio">
+            <input type="hidden" name="modulo" value="ModuloServizio">
             <h4>Compila il modulo</h4>
             <div class="form-group">
                 <input type="text" class="form-control" id="nome" name="nome_ign" placeholder="Nome (IGN)" required>
@@ -63,7 +64,7 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwJxT64Y7k2QP-d1OGgqQlxftApjS7ajXNxpunNnszQ/dev'
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyu9u23j6okejvIKLmslp92FLwifHkkTjHThw_BfXyHux4GeoIJUOo4mguwQr0qzO-myw/exec'
         const form = document.forms['ModuloServizio']
 
         form.addEventListener('submit', e => {
