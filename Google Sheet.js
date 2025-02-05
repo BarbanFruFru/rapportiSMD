@@ -2,7 +2,7 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbyonEeiFHAcCRNxxpqTEb
 
 const form = document.forms['ModuloArresto']
 
-form.addEventListener('submint', e => {
+form.addEventListener('submit', e => {
   e.preventDefault()
   fetch(scriptURL, { method: 'POST', body: new FormDaya(form)})
   .then(responde => alert("Rapporto inviato correttamente."))
