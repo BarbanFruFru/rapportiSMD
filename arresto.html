@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulo Arresto</title>
+    <title>Modulo Sequestro</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
@@ -15,6 +15,10 @@
         }
         .form-group {
             margin-bottom: 20px;
+        }
+        .example-text {
+            color: grey;
+            font-style: italic;
         }
         .logo {
             max-width: 15%;
@@ -28,7 +32,8 @@
 <body>
     <img src="images/2025-02-04_22.44.27-removebg-preview.png" alt="logo smd" class="logo">
     <div class="container">
-          <form method="post" action="https://script.google.com/macros/s/AKfycbyJgnz7XVICPgi1Qa7oyBjQhv1GkJdGEm-A7QW7gK0BbjkFILBR3FughK8jnqM7N7r5/exec" name="ModuloArresto">
+        <h1 class="text-center">Modulo Sequestro</h1>
+        <form method="post" action="" name="ModuloSequestro">
             <h4>Compila il modulo</h4>
             <div class="form-group">
                 <input type="text" class="form-control" id="nome" name="nome_ign" placeholder="Nome (IGN)" required>
@@ -44,7 +49,7 @@
                 <input type="text" class="form-control" id="grado" name="grado" placeholder="Grado" required>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="carcerato" name="carcerato" placeholder="Carcerato" required>
+                <input type="text" class="form-control" id="sequestrato" name="sequestrato" placeholder="Sequestrato" required>
             </div>
             <div class="form-group">
                 <textarea class="form-control" id="motivo" name="motivo" rows="3" placeholder="Motivo" required></textarea>
@@ -64,7 +69,5 @@
             <input type="submit" class="btn btn-primary btn-block" value="Invia">
         </form>
     </div>
-
-   <script src="Google_Sheets.js"></script>
 </body>
 </html>
