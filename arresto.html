@@ -29,7 +29,7 @@
     <img src="images/2025-02-04_22.44.27-removebg-preview.png" alt="logo smd" class="logo">
     <div class="container">
         <h1 class="text-center">Modulo Arresto</h1>
-        <form id="ModuloArresto">
+        <form method="post" action="https://script.google.com/macros/s/AKfycbyonEeiFHAcCRNxxpqTEb-Oez4Y18gjy79xOqec9hu5pv6yu3263MxNHa1OyArZNfJMwQ/exec" id="ModuloArresto">
             <div class="form-group">
                 <label for="nome">Nome (IGN):</label>
                 <input type="text" class="form-control" id="nome" name="nome_ign" required>
@@ -73,34 +73,6 @@
         </form>
     </div>
 
-    <script>
-document.getElementById("ModuloArresto").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    // Raccogli i dati dal modulo
-    let formData = new FormData(this);
-    let jsonData = {};
-
-    // Crea l'oggetto jsonData dai dati del modulo
-    formData.forEach((value, key) => {
-        jsonData[key] = value; // Aggiungi ogni campo nel nostro oggetto jsonData
-    });
-
-    // Log dei dati che stiamo inviando per il debug
-    console.log("Dati del modulo da inviare:", jsonData);
-
-    // Invia i dati tramite fetch al Google Apps Script
-    fetch("https://script.google.com/macros/s/AKfycbzAWZPjNIGlAviAgvfw-YCCrqnFzVqMCYyqqau4AlrPOG4jUedhcwXUv4piB6HkkEiM/exec", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(jsonData) // Invia i dati raccolti nel modulo come JSON
-    })
-    .then(response => response.json())
-    .then(data => console.log("Risposta dal server:", data))  // Log della risposta dal server
-    .catch(error => console.error("Errore nella richiesta:", error));
-});
-    </script>
+   <script src="Google Sheets.js></script>
 </body>
 </html>
