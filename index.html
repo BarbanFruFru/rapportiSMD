@@ -26,7 +26,7 @@
             color: gray;
         }
         .logo {
-            max-width: 15%; /* Riduce la dimensione dell'immagine */
+            max-width: 10%; /* Riduce la dimensione dell'immagine */
             height: auto;
             position: absolute;
             top: 20px; /* Posiziona l'immagine in alto */
@@ -39,6 +39,11 @@
     </style>
 </head>
 <body>
+    <script>
+        if (localStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
     <img src="images/2025-02-04_22.44.27-removebg-preview.png" alt="logo smd" class="logo">
     <div class="container text-center content">
         <h1>Seleziona un modulo</h1>
