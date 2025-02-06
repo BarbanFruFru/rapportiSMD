@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login SMD</title>
+    <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             background-color: #f8f9fa;
@@ -54,22 +53,22 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Definisci le credenziali accettabili
-            const validCredentials = [
-                { username: 'admin', password: 'adminromano0411' },
-                { username: 'user1', password: 'password1' },
-                { username: 'user2', password: 'password2' }
-            ];
-
-            // Verifica le credenziali
-            const isValid = validCredentials.some(cred => cred.username === username && cred.password === password);
-
-            if (isValid) {
-                localStorage.setItem('authenticated', 'true');
-                window.location.href = 'index.html';
-            } else {
-                document.getElementById('error').style.display = 'block';
-            }
+            fetch('https://script.google.com/macros/s/AKfycbzw0QN1MFT2pQ_nlRVwnotGZL0fxEqb9UoFsot4LqQ7E4e0tBc20xU4CK6t6F2AVPRr1Q/exec', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    username: username,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    localStorage.setItem('authenticated', 'true');
+                    window.location.href = 'index.html';
+                } else {
+                    document.getElementById('error').style.display = 'block';
+                }
+            });
         });
     </script>
 </body>
