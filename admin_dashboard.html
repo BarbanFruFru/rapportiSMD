@@ -12,9 +12,11 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-3xl font-bold">Dashboard Rapporti</h1>
-                <button onclick="window.location.href='index.html'" class="bg-gray-500 text-white px-4 py-2 rounded">
-                    Torna Indietro
-                </button>
+                <div class="space-x-4">
+                    <button onclick="window.location.href='index.html'" class="bg-gray-500 text-white px-4 py-2 rounded">
+                        Torna Indietro
+                    </button>
+                </div>
             </div>
 
             <div class="mb-6 flex gap-4">
@@ -35,13 +37,15 @@
                 <table class="min-w-full">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Data</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nome</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Corpo</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dettagli</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Agente</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Corpo</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dettagli</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Azioni</th>
                         </tr>
                     </thead>
-                    <tbody id="reportsTable" class="bg-white divide-y divide-gray-200"></tbody>
+                    <tbody id="reportsTable" class="bg-white divide-y divide-gray-200">
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -58,58 +62,65 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
+            if (!await checkAdminAccess()) {
+                window.location.href = 'index.html';
+            }
             loadSheetData();
         });
 
         async function loadSheetData() {
             try {
-                const response = await fetch('https://script.google.com/macros/s/AKfycbwua1xJ_pmCNENg92Sq83BRxmfm35OI84ZxFc8NWJoLHAlXWgoSOLHqMJXsuosN76NyeQ/exec');
+                const response = await fetch('https://script.google.com/macros/s/YOUR_SCRIPT_URL/exec');
                 const data = await response.json();
                 displayData(data);
             } catch (err) {
-                console.error('Errore nel caricamento:', err);
+                console.error('Error loading sheet data:', err);
             }
         }
 
         function displayData(data) {
             const tbody = document.getElementById('reportsTable');
             tbody.innerHTML = '';
-            const reports = [...data.Arresto, ...data.Sequestro, ...data.Multa, ...data.Servizio];
-            reports.shift(); // Rimuove la riga di intestazione
-
-            reports.forEach((row, index) => {
+            for (let i = 1; i < data.length; i++) {
+                const row = data[i];
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="px-6 py-4 whitespace-nowrap">${row[7]}</td>
                     <td class="px-6 py-4 whitespace-nowrap">${row[1]}</td>
                     <td class="px-6 py-4 whitespace-nowrap">${row[2]}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <button onclick="showDetails(${index})" class="text-blue-600 hover:text-blue-900">
+                        <button onclick="showDetails(${i}, '${row[0]}')" class="text-blue-600 hover:text-blue-900">
                             Vedi Dettagli
+                        </button>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <button onclick="deleteReport(${i})" class="text-red-600 hover:text-red-900">
+                            Elimina
                         </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
-            });
+            }
         }
 
-        function showDetails(index) {
+        function showDetails(rowIndex, type) {
             const modal = document.getElementById('detailsModal');
             const modalContent = document.getElementById('modalContent');
-            const reports = [...data.Arresto, ...data.Sequestro, ...data.Multa, ...data.Servizio];
-            const report = reports[index];
+            const data = reportsData[rowIndex];
+            let detailsHtml = `<h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Dettagli Rapporto</h3>`;
             
-            modalContent.innerHTML = `
-                <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Dettagli Rapporto</h3>
-                <p><strong>Nome:</strong> ${report[1]}</p>
-                <p><strong>Corpo:</strong> ${report[2]}</p>
-                <p><strong>Grado:</strong> ${report[3]}</p>
-                <p><strong>Data:</strong> ${report[7]}</p>
-                <p><strong>Ora:</strong> ${report[8]}</p>
-                <p><strong>Motivo:</strong> ${report[5]}</p>
-                <p><strong>Luogo:</strong> ${report[6]}</p>
-                <p><strong>Colleghi:</strong> ${report[9]}</p>
-            `;
+            if (type === 'Arresto') {
+                detailsHtml += `<p><strong>Carcerato:</strong> ${data[4]}</p>
+                                <p><strong>Motivo:</strong> ${data[5]}</p>`;
+            } else if (type === 'Sequestro') {
+                detailsHtml += `<p><strong>Oggetti Sequestrati:</strong> ${data[10]}</p>`;
+            } else if (type === 'Multa') {
+                detailsHtml += `<p><strong>Importo:</strong> ${data[10]}</p>`;
+            } else if (type === 'Servizio') {
+                detailsHtml += `<p><strong>Ora Entrata:</strong> ${data[4]}</p>
+                                <p><strong>Ora Uscita:</strong> ${data[5]}</p>`;
+            }
+            modalContent.innerHTML = detailsHtml;
             modal.classList.remove('hidden');
         }
 
