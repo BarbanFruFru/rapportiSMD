@@ -82,14 +82,13 @@
 
         async function loadSheetData() {
             try {
-                const response = await gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: 'YOUR_REPORTS_SHEET_ID', // Your reports sheet ID
-                    range: 'A:Z', // Adjust based on your sheet's structure
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzfU6d1J8GzPEkqriFDBOREhWM2zy10xcp-IpPWdqs7qPBQiy_QTwezCCd4QRlrHqjc6Q/exec', {
+                    method: 'GET'
                 });
 
-                const values = response.result.values;
-                if (values) {
-                    displayData(values);
+                const data = await response.json();
+                if (data) {
+                    displayData(data);
                 }
             } catch (err) {
                 console.error('Error loading sheet data:', err);
@@ -181,7 +180,6 @@
         // Initialize Google Sheets API
         function initClient() {
             gapi.client.init({
-                apiKey: 'YOUR_API_KEY',
                 discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
             }).then(loadSheetData);
         }
@@ -190,4 +188,3 @@
     </script>
 </body>
 </html>
-
