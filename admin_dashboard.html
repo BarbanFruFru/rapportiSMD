@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - Rapporti SMD</title>
-    <script src="https://apis.google.com/js/api.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
@@ -70,124 +69,46 @@
     </div>
 
     <script>
-        // Check if user is logged in and has admin access when page loads
         document.addEventListener('DOMContentLoaded', async function() {
-            // Add your session check here
-            // If not admin, redirect to index
-            if (!await checkAdminAccess(/* current user email */)) {
-                window.location.href = 'index.html';
-            }
-            loadSheetData();
-        });
-
-        async function loadSheetData() {
+            // Fai una richiesta al tuo Google Apps Script per ottenere i dati
             try {
-                const response = await gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: 'YOUR_REPORTS_SHEET_ID', // Your reports sheet ID
-                    range: 'A:Z', // Adjust based on your sheet's structure
-                });
-
-                const values = response.result.values;
-                if (values) {
-                    displayData(values);
-                }
-            } catch (err) {
-                console.error('Error loading sheet data:', err);
+                const response = await fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'); // Sostituisci con il link del tuo script
+                const data = await response.json();
+    
+                // Elabora i dati ricevuti
+                displayData(data);
+            } catch (error) {
+                console.error('Errore durante il caricamento dei dati:', error);
             }
-        }
-
+        });
+    
         function displayData(data) {
             const tbody = document.getElementById('reportsTable');
             tbody.innerHTML = '';
-
-            // Skip header row if it exists
-            const startIndex = data[0][0] === 'Data' ? 1 : 0;
-
-            for (let i = startIndex; i < data.length; i++) {
-                const row = data[i];
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap">${row[0]}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">${row[1]}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">${row[2]}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <button onclick="showDetails(${i})" class="text-blue-600 hover:text-blue-900">
-                            Vedi Dettagli
-                        </button>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <button onclick="deleteReport(${i})" class="text-red-600 hover:text-red-900">
-                            Elimina
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            }
-        }
-
-        function showDetails(rowIndex) {
-            const modal = document.getElementById('detailsModal');
-            const modalContent = document.getElementById('modalContent');
-            
-            // Get the full row data and display it
-            const data = /* get data for this row */;
-            modalContent.innerHTML = `
-                <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Dettagli Rapporto</h3>
-                <!-- Add your detail fields here -->
-            `;
-            
-            modal.classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('detailsModal').classList.add('hidden');
-        }
-
-        function applyFilters() {
-            const typeFilter = document.getElementById('typeFilter').value;
-            const dateFilter = document.getElementById('dateFilter').value;
-            
-            // Reload data with filters
-            loadSheetData().then(() => {
-                // Filter the displayed data
-                const rows = document.querySelectorAll('#reportsTable tr');
-                rows.forEach(row => {
-                    const type = row.cells[1].textContent;
-                    const date = row.cells[0].textContent;
-                    
-                    let showRow = true;
-                    if (typeFilter !== 'all' && type !== typeFilter) showRow = false;
-                    if (dateFilter && date !== dateFilter) showRow = false;
-                    
-                    row.style.display = showRow ? '' : 'none';
+    
+            // Qui aggiungi la logica per visualizzare i dati (come nel tuo esempio)
+            for (let key in data) {
+                data[key].forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">${row["Data"] || "N/A"}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${row["Tipo"] || "N/A"}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${row["Agente"] || "N/A"}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button onclick="showDetails(${row})" class="text-blue-600 hover:text-blue-900">
+                                Vedi Dettagli
+                            </button>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button onclick="deleteReport(${row})" class="text-red-600 hover:text-red-900">
+                                Elimina
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
                 });
-            });
-        }
-
-        async function deleteReport(rowIndex) {
-            if (confirm('Sei sicuro di voler eliminare questo rapporto?')) {
-                try {
-                    // Implement deletion logic here
-                    // You'll need to use the Google Sheets API to delete the row
-                    await deleteRowFromSheet(rowIndex);
-                    loadSheetData(); // Reload the data
-                } catch (error) {
-                    console.error('Error deleting report:', error);
-                    alert('Errore durante l\'eliminazione del rapporto');
-                }
             }
         }
-
-        // Initialize Google Sheets API
-        function initClient() {
-            gapi.client.init({
-                apiKey: 'YOUR_API_KEY',
-                discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-            }).then(loadSheetData);
-        }
-
-        gapi.load('client', initClient);
     </script>
 </body>
 </html>
-
