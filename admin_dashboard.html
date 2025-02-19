@@ -79,7 +79,7 @@
         });
 
         const data = await response.json();
-        return data.success && data.role === 'Admin'; // Controlla se il ruolo è "admin"
+        return data.role === 'Admin'; // Controlla se il ruolo è "admin"
     } catch (err) {
         console.error('Errore nel controllo admin:', err);
         return false;
