@@ -81,19 +81,23 @@
         });
 
         async function loadSheetData() {
-            try {
-                const response = await fetch('https://script.google.com/macros/s/AKfycbzfU6d1J8GzPEkqriFDBOREhWM2zy10xcp-IpPWdqs7qPBQiy_QTwezCCd4QRlrHqjc6Q/exec', {
-                    method: 'GET'
-                });
+    try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzRYmcKO8kQR3zN5h53qepv_Wp9J8vFSPCoP7R5sANBJ3cNNbG9H3R-3Z-BWjYQKkk4zw/exec', {
+            method: 'GET'
+        });
 
-                const data = await response.json();
-                if (data) {
-                    displayData(data);
-                }
-            } catch (err) {
-                console.error('Error loading sheet data:', err);
-            }
+        const data = await response.json();
+        
+        // Mostra i dati da un foglio specifico, ad esempio "Arresto"
+        const selectedSheet = data.Arresto;  // Puoi cambiare "Arresto" con qualsiasi foglio
+
+        if (selectedSheet) {
+            displayData(selectedSheet);
         }
+    } catch (err) {
+        console.error('Error loading sheet data:', err);
+    }
+}
 
         function displayData(data) {
             const tbody = document.getElementById('reportsTable');
