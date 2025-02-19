@@ -54,7 +54,7 @@
             event.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
+    
             fetch('https://script.google.com/macros/s/AKfycbzw0QN1MFT2pQ_nlRVwnotGZL0fxEqb9UoFsot4LqQ7E4e0tBc20xU4CK6t6F2AVPRr1Q/exec', {
                 method: 'POST',
                 body: new URLSearchParams({
@@ -66,6 +66,7 @@
             .then(data => {
                 if (data.success) {
                     localStorage.setItem('authenticated', 'true');
+                    localStorage.setItem('role', data.role); // Salvo il ruolo dell'utente
                     window.location.href = 'old_index.html';
                 } else {
                     document.getElementById('error').style.display = 'block';

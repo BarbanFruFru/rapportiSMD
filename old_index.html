@@ -43,6 +43,17 @@
         if (localStorage.getItem('authenticated') !== 'true') {
             window.location.href = 'index.html';
         }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            const role = localStorage.getItem('role');
+            if (role === 'Admin') {
+                const adminButton = document.createElement('a');
+                adminButton.href = 'admin_dashboard.html';
+                adminButton.classList.add('btn', 'btn-dark');
+                adminButton.textContent = '⚙️ Admin Dashboard';
+                document.querySelector('.container .mt-4').appendChild(adminButton);
+            }
+        });
     </script>
     <img src="images/2025-02-04_22.44.27-removebg-preview.png" alt="logo smd" class="logo">
     <div class="container text-center content">
