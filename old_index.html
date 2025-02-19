@@ -36,6 +36,14 @@
             margin-top: auto;
             margin-bottom: auto;
         }
+        .admin-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto; /* Spazio sopra il supporto */
+            font-size: 20px;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -49,9 +57,12 @@
             if (role === 'Admin') {
                 const adminButton = document.createElement('a');
                 adminButton.href = 'admin_dashboard.html';
-                adminButton.classList.add('btn', 'btn-dark');
+                adminButton.classList.add('btn', 'btn-dark', 'admin-btn');
                 adminButton.textContent = '⚙️ Admin Dashboard';
-                document.querySelector('.container .mt-4').appendChild(adminButton);
+    
+                // Prende il div supporto e aggiunge il bottone sopra di esso
+                const supportDiv = document.querySelector('.supporto');
+                supportDiv.parentNode.insertBefore(adminButton, supportDiv);
             }
         });
     </script>
@@ -68,6 +79,6 @@
             <a href="richieste.html" class="btn btn-success">📋 Richieste</a>
         </div>
     </div>
-    <div class="supporto">Per supporto @laasquale 📲</div>
+    <div class="supporto">Per supporto @laapuissancee 📲</div>
 </body>
 </html>
