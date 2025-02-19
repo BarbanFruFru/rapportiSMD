@@ -73,7 +73,7 @@
         // Carica i dati dal Google Script
         async function loadSheetData() {
             try {
-                const response = await fetch('https://script.google.com/macros/s/AKfycbx_w7CL6JyqgoiAV1lpSOll9tI8lGSzSVPA8nhdZ34QYmaBinojpLHyG-_x5dn6sc4e5g/exec');
+                const response = await fetch('https://script.google.com/macros/s/AKfycbwaSvHQQmCrMnh3TPgns1YoAqClFjAaMH6RF2joEIuvnp27IgnOUdejbvYQC1pOGIJ3uw/exec');
                 const data = await response.json();
 
                 if (data.error) {
