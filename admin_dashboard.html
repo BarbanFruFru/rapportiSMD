@@ -72,27 +72,39 @@
             }
         }
 
-        function displayData(data) {
-            const tbody = document.getElementById('reportsTable');
-            tbody.innerHTML = '';
+        // Converte la data nel formato corretto
+function formatDate(isoDate) {
+    if (!isoDate) return "N/A"; // Se è vuoto, metti un valore di default
+    return isoDate.split("T")[0]; // Prende solo la parte della data
+}
 
-            Object.keys(data).forEach(type => {
-                data[type].forEach((row, index) => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td class="px-6 py-4 whitespace-nowrap">${row["Data"] || '-'}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">${type}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">${row["Nome (IGN)"] || '-'}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <button onclick="showDetails('${type}', ${index})" class="text-blue-600 hover:text-blue-900">
-                                Vedi Dettagli
-                            </button>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            });
-        }
+// Visualizza i dati nella tabella
+function displayData(data) {
+    const tbody = document.getElementById('reportsTable');
+    tbody.innerHTML = '';
+
+    Object.keys(data).forEach(type => {
+        data[type].forEach((row, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap">${formatDate(row["Data"])}</td>
+                <td class="px-6 py-4 whitespace-nowrap">${type}</td>
+                <td class="px-6 py-4 whitespace-nowrap">${row["Nome (IGN)"]}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <button onclick="showDetails(${index}, '${type}')" class="text-blue-600 hover:text-blue-900">
+                        Vedi Dettagli
+                    </button>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <button onclick="deleteReport(${index}, '${type}')" class="text-red-600 hover:text-red-900">
+                        Elimina
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    });
+}
 
         function showDetails(type, index) {
             const row = reportData[type][index];
@@ -128,5 +140,24 @@
 
         document.addEventListener('DOMContentLoaded', loadSheetData);
     </script>
+    <script>
+        // Mostra/nasconde il bottone quando si scrolla
+window.onscroll = function () {
+    const btn = document.getElementById("scrollToTopBtn");
+    if (document.documentElement.scrollTop > 200) {
+        btn.classList.remove("hidden");
+    } else {
+        btn.classList.add("hidden");
+    }
+};
+
+// Scrolla in cima
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+    </script>
+    <button id="scrollToTopBtn" onclick="scrollToTop()" class="fixed bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg hidden">
+        ↑
+    </button>
 </body>
 </html>
