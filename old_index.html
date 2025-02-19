@@ -36,10 +36,16 @@
             margin-top: auto;
             margin-bottom: auto;
         }
+        .admin-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px; /* Aumenta lo spazio rispetto ai bottoni principali */
+            margin-bottom: 50px; /* Distanza dal supporto */
+        }
+
         .admin-btn {
-            display: block;
             width: 200px;
-            margin: 100px auto 20px auto; /* 100px sopra per alzarlo ancora di più */
             font-size: 20px;
             text-align: center;
         }
@@ -55,14 +61,19 @@
         document.addEventListener('DOMContentLoaded', function() {
             const role = localStorage.getItem('role');
             if (role === 'Admin') {
+                const adminContainer = document.createElement('div');
+                adminContainer.classList.add('admin-container');
+    
                 const adminButton = document.createElement('a');
                 adminButton.href = 'admin_dashboard.html';
                 adminButton.classList.add('btn', 'btn-dark', 'admin-btn');
                 adminButton.textContent = '⚙️ Admin Dashboard';
     
-                // Prende il div supporto e aggiunge il bottone sopra di esso
+                adminContainer.appendChild(adminButton);
+    
+                // Inserisce il bottone prima del supporto
                 const supportDiv = document.querySelector('.supporto');
-                supportDiv.parentNode.insertBefore(adminButton, supportDiv);
+                supportDiv.parentNode.insertBefore(adminContainer, supportDiv);
             }
         });
     </script>
