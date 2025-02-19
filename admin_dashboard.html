@@ -78,8 +78,8 @@
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
 
-        const data = await response.json();
-        return data.role === 'Admin'; // Controlla se il ruolo è "admin"
+        const role = localStorage.getItem('role');
+        return role === 'Admin'; // Controlla se il ruolo è "admin"
     } catch (err) {
         console.error('Errore nel controllo admin:', err);
         return false;
