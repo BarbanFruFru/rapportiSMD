@@ -79,7 +79,7 @@
 
         async function loadSheetData() {
             try {
-                const response = await fetch('https://script.google.com/macros/s/AKfycbwua1xJ_pmCNENg92Sq83BRxmfm35OI84ZxFc8NWJoLHAlXWgoSOLHqMJXsuosN76NyeQ/exec');
+                const response = await fetch('https://script.google.com/macros/s/AKfycbwmJ7Kl9qvjjaGbhFZ6JqTxqjUqxDML9vV1sNg9iFS5h1XUt1BR1wGV3N6CmermgBOl_Q/exec');
                 const data = await response.json();
                 displayData(data);
             } catch (err) {
@@ -116,7 +116,7 @@
         function showDetails(sheet, rowIndex) {
             const modal = document.getElementById('detailsModal');
             const modalContent = document.getElementById('modalContent');
-            fetch('https://script.google.com/macros/s/AKfycbwua1xJ_pmCNENg92Sq83BRxmfm35OI84ZxFc8NWJoLHAlXWgoSOLHqMJXsuosN76NyeQ/exec')
+            fetch('https://script.google.com/macros/s/AKfycbwmJ7Kl9qvjjaGbhFZ6JqTxqjUqxDML9vV1sNg9iFS5h1XUt1BR1wGV3N6CmermgBOl_Q/exec')
                 .then(response => response.json())
                 .then(data => {
                     const row = data[sheet][rowIndex + 1];
