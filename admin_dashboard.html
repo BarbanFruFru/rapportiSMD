@@ -74,7 +74,7 @@
 
         function formatDate(isoDate) {
             if (!isoDate) return "N/A";
-            return isoDate.split("T")[0];
+            return new Date(isoDate).toLocaleDateString();
         }
 
         function displayData(data) {
@@ -131,39 +131,21 @@
                 alert("Errore nella richiesta al server");
             }
         }
-        function viewDetails(recordData) {
-    const modal = document.getElementById('detailsModal');
-    const modalContent = document.getElementById('modalContent');
-    
-    // Converti la stringa JSON in oggetto se necessario
-    const record = typeof recordData === 'string' ? JSON.parse(recordData) : recordData;
-    
-    // Costruisci il contenuto HTML per i dettagli
-    let detailsHtml = '<div class="modal-details">';
-    for (const [key, value] of Object.entries(record)) {
-        if (key !== '_sheetName' && key !== '_rowIndex') {
-            const displayValue = key === 'Data' ? new Date(value).toLocaleDateString() : value;
-            detailsHtml += `<p><strong>${key}:</strong> ${displayValue}</p>`;
-        }
-    }
-    detailsHtml += '</div>';
-    
-    modalContent.innerHTML = detailsHtml;
-    modal.style.display = 'block';
-}
-       // function showDetails(type, index) {
-       //     const row = reportData[type][index];
-       //     const modalContent = document.getElementById('modalContent');
-       //     let detailsHtml = `<h3 class="text-lg font-medium text-gray-900 mb-4">Dettagli ${type}</h3>`;
-        //    for (const [key, value] of Object.entries(row)) {
-          //      if (key !== '_sheetName' && key !== '_rowIndex') {
-        //            detailsHtml += `<p><strong>${key}:</strong> ${value || "N/D"}</p>`;
-         //       }
-         //   }
+        
+        function showDetails(type, index) {
+            const row = reportData[type][index];
+            const modalContent = document.getElementById('modalContent');
+            let detailsHtml = `<h3 class="text-lg font-medium text-gray-900 mb-4">Dettagli ${type}</h3>`;
+            for (const [key, value] of Object.entries(row)) {
+                if (key !== '_sheetName' && key !== '_rowIndex') {
+                    const displayValue = key === 'Data' ? formatDate(value) : value;
+                    detailsHtml += `<p><strong>${key}:</strong> ${displayValue || "N/D"}</p>`;
+                }
+            }
 
-       //     modalContent.innerHTML = detailsHtml;
-        //    document.getElementById('detailsModal').classList.remove('hidden');
-        //} 
+            modalContent.innerHTML = detailsHtml;
+            document.getElementById('detailsModal').classList.remove('hidden');
+        } 
 
         function closeModal() {
             document.getElementById('detailsModal').classList.add('hidden');
